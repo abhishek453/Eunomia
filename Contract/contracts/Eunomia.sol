@@ -8,10 +8,13 @@ contract Eunomia {
      
     uint256 total_paid;
     uint256 total_weight;
+    uint256 total_dump;
 
     constructor() payable {
         total_weight = 0;
         total_paid = 0;
+        total_dump = 0;
+
         console.log("We have been constructed!");
     }
 
@@ -20,6 +23,7 @@ contract Eunomia {
         uint256 prizeAmount = (trash_type*75 + weight*25)*0.000001 ether;
         total_weight += weight;
         total_paid += prizeAmount;
+        total_dump += 1;
 
         require(
                 prizeAmount <= address(this).balance,
@@ -35,6 +39,10 @@ contract Eunomia {
 
     function get_paid() public view returns (uint256){
         return total_paid;
+    }
+
+    function get_dump() public view returns (uint256){
+        return total_dump;
     }
 
 }
