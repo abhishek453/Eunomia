@@ -8,6 +8,7 @@ const App = () => {
 
   const contractAddress = "0x63A73BE2f53B6baa858A6d249aE7CAbB710149E0";
 
+
   const checkIfWalletIsConnected = async () => {
     try {
       const { ethereum } = window;
