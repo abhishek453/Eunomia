@@ -6,7 +6,7 @@ import eunomia from './utils/Eunomia.json';
 const App = () => {
   const [currentAccount, setCurrentAccount] = useState("");
 
-  const contractAddress = "0x7260f117D9f57A7109df7383182B9d056bbf7960";
+  const contractAddress = "0x63A73BE2f53B6baa858A6d249aE7CAbB710149E0";
 
   const checkIfWalletIsConnected = async () => {
     try {
@@ -77,11 +77,13 @@ const App = () => {
 
         count = await EunomiaContract.get_dump();
         console.log("Retrieved total dump count...", count.toNumber());
+        alert('Your transaction has been mined -- ', dumpTxn.hash)
       } else {
         console.log("Ethereum object doesn't exist!");
       }
     } catch (error) {
       console.log(error)
+      alert('There has been an error. Your request was not processed.')
     }
   }
 
@@ -97,20 +99,24 @@ const App = () => {
         <div className="header">
         Welcome to Eunomia 
         </div>
+        <p>This is a simulation of a terminal attached to the smart trash bin. There, the weight will be computed <i>vice</i>.</p>
 
         <div className="bio">
-        Types of trash:
-          1. Polyethene bags
-          2. Paper (with plastic coating)
-          3. Bottles/Food containers
-          4. Metal artefacts
+        <h3>Types of trash:</h3>
+        <ol type="1">
+          <li>Low Density Polyeurethylene (including coated paper)</li>
+          <li>Paper</li>
+          <li>Bottles/Food containers/High Density Polyethylene</li>
+          <li>Electronic Waste</li>
+          <li>Metal Artefacts</li>
+        </ol>
         </div>
 
         <label for="type_input">Enter the type of your trash - refer above: </label>
-        <input type="number" id = "type_input" name = "type_input" /> 
+        <input type="number" id = "type_input" name = "type_input" min="1" max="5"/> 
 
         <label for="weight_input">Enter the weight of your trash in grams: </label>
-        <input type="number" id = "weight_input" name = "weight_input" /> 
+        <input type="number" id = "weight_input" name = "weight_input" min = "1"/> 
 
         <button className="waveButton" onClick={dump}>
           Submit
